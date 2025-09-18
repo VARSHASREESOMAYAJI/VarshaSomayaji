@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skills - Varsha Somayaji</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(270deg, #ffe0f0, #e0f7ff, #fff7e0);
+      background-size: 600% 600%;
+      animation: bgAnimation 12.5s ease infinite;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    @keyframes bgAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.8);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      -webkit-backdrop-filter: 8px;
+      backdrop-filter: blur(8px);
+      margin-bottom: 2rem;
+    }
+
+    .nav-icon {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .nav-icon:hover {
+      background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffb199);
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: -22px;
+      background-color: #ff758c;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .nav-icon:hover .tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      color: #ff758c;
+      margin-bottom: 2rem;
+    }
+
+    /* New Styles for Skills Page */
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .skills-tags span {
+      padding: 0.5rem 1rem;
+      border: 1px solid #aaa;
+      border-radius: 10px;
+      background-color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .skills-tags span:hover {
+      background: linear-gradient(to right, #ff758c, #ffa07a);
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .skills-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      background: rgba(255,255,255,0.4);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .skill-box {
+      flex: 1 1 250px;
+      max-width: 300px;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .skill-box i {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ff758c;
+    }
+
+    .skill-box h3 {
+      margin: 0.5rem 0;
+      font-size: 1.3rem;
+    }
+
+    .skill-box p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    @media (max-width: 768px) {
+      .skills-cards {
+        flex-direction: column;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Existing navbar remains unchanged -->
+  <nav>
+    <a href="index.html" class="nav-icon" aria-label="Home">
+      <i class="fas fa-home"></i>
+      <span class="tooltip">Home</span>
+    </a>
+    <a href="about.html" class="nav-icon" aria-label="About">
+      <i class="fas fa-user"></i>
+      <span class="tooltip">About</span>
+    </a>
+    <a href="skills.html" class="nav-icon" aria-label="Skills">
+      <i class="fas fa-cogs"></i>
+      <span class="tooltip">Skills</span>
+    </a>
+    <a href="projects.html" class="nav-icon" aria-label="Projects">
+      <i class="fas fa-code"></i>
+      <span class="tooltip">Projects</span>
+    </a>
+    <a href="services.html" class="nav-icon" aria-label="Services">
+      <i class="fas fa-briefcase"></i>
+      <span class="tooltip">Services</span>
+    </a>
+    <a href="education.html" class="nav-icon" aria-label="Education">
+      <i class="fas fa-graduation-cap"></i>
+      <span class="tooltip">Education</span>
+    </a>
+    <a href="contact.html" class="nav-icon" aria-label="Contact">
+      <i class="fas fa-envelope"></i>
+      <span class="tooltip">Contact</span>
+    </a>
+  </nav>
+
+  <!-- 💡 New Skills Section -->
+  <main>
+    <h1>Tools & Technologies I Work With</h1>
+
+    <div class="skills-tags">
+      <span>Git</span>
+      <span>VS Code</span>
+      <span>Docker</span>
+      <span>Figma</span>
+      <span>Postman</span>
+      <span>Jest</span>
+      <span>Webpack</span>
+      <span>Firebase</span>
+      <span>Supabase</span>
+      <span>Vercel</span>
+      <span>GitHub Actions</span>
+      <span>Jira</span>
+    </div>
+
+    <div class="skills-cards">
+      <div class="skill-box">
+        <i class="fas fa-code-branch"></i>
+        <h3>Version Control</h3>
+        <p>Expert in Git workflows and collaborative development</p>
+      </div>
+      <div class="skill-box">
+        <i class="fas fa-terminal"></i>
+        <h3>Command Line</h3>
+        <p>Comfortable with Unix/Linux systems and shell scripting</p>
+      </div>
+      <div class="skill-box">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Best Practices</h3>
+        <p>Strong focus on security, testing, and code quality</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(270deg, #ffe0f0, #e0f7ff, #fff7e0);
+      background-size: 600% 600%;
+      animation: bgAnimation 12.5s ease infinite;
+      cursor: none;
+    }
+    @keyframes bgAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Neon Rope Cursor Base Styles */
+    .cursor-rope {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 0 0 15px 15px;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .nav-icon {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .nav-icon:hover {
+      background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffb199);
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-icon i {
+      transition: color 0.3s ease;
+    }
+
+    /* Tooltip Styles */
+    .tooltip {
+      position: absolute;
+      bottom: -22px;
+      background-color: #ff758c;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+
+    .nav-icon:hover .tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1rem;
+    }
+
+    /* Blob animation */
+    .blob {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: blobShape 6s infinite ease-in-out, blobColor 5s infinite alternate;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(255, 117, 140, 0.7);
+    }
+
+    @keyframes blobShape {
+      0%,
+      100% {
+        border-radius: 50% 50% 50% 50%;
+      }
+      25% {
+        border-radius: 60% 40% 60% 40%;
+      }
+      50% {
+        border-radius: 50% 60% 40% 50%;
+      }
+      75% {
+        border-radius: 40% 50% 60% 50%;
+      }
+    }
+
+    @keyframes blobColor {
+      0% {
+        background: #ff758c;
+      }
+      33% {
+        background: #ff7eb3;
+      }
+      66% {
+        background: #ffb199;
+      }
+      100% {
+        background: #ff758c;
+      }
+    }
+
+    /* Name color animation */
+    .name {
+      animation: nameColor 5s infinite alternate;
+    }
+
+    @keyframes nameColor {
+      0% {
+        color: #ff758c;
+      }
+      33% {
+        color: #ff7eb3;
+      }
+      66% {
+        color: #ffb199;
+      }
+      100% {
+        color: #ff758c;
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 1rem 0 0.5rem 0;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: gray;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      max-width: 600px;
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    /* Buttons */
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .btn-dark {
+      background: black;
+      color: white;
+    }
+
+    .btn-dark:hover {
+      background: #d63384;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-light {
+      border: 1px solid #ccc;
+      background: white;
+      color: black;
+    }
+
+    .btn-light:hover {
+      background: #ff758c;
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Social Icons */
+    .social {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      justify-content: center;
+    }
+
+    .social a {
+      color: rgba(255, 171, 171, 0.749);
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .social a:hover {
+      color: rgb(242, 179, 218);
+    }
+
+    @media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .blob {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    padding: 0 1rem;
+  }
+
+  .buttons a {
+    min-width: 120px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .nav-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .tooltip {
+    bottom: -20px;
+    font-size: 0.6rem;
+  }
+
+  .social a {
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <!-- <a href="index.html" class="nav-icon" aria-label="Home">
+      <i class="fas fa-home"></i>
+      <span class="tooltip">Home</span> -->
+    </a>
+    <a href="about.html" class="nav-icon" aria-label="About">
+      <i class="fas fa-user"></i>
+      <span class="tooltip">About</span>
+    </a>
+    <a href="skills.html" class="nav-icon" aria-label="Skills">
+      <i class="fas fa-cogs"></i>
+      <span class="tooltip">Skills</span>
+    </a>
+    <a href="projects.html" class="nav-icon" aria-label="Projects">
+      <i class="fas fa-code"></i>
+      <span class="tooltip">Projects</span>
+    </a>
+    <a href="services.html" class="nav-icon" aria-label="Services">
+      <i class="fas fa-briefcase"></i>
+      <span class="tooltip">services</span>
+    </a>
+    <a href="education.html" class="nav-icon" aria-label="Education">
+      <i class="fas fa-graduation-cap"></i>
+      <span class="tooltip">Education</span>
+    </a>
+    <a href="contact.html" class="nav-icon" aria-label="Contact">
+      <i class="fas fa-envelope"></i>
+      <span class="tooltip">Contact</span>
+    </a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="blob">
+      <img
+        src="prf.png"
+        alt="Profile"
+        style="width: 100%; height: 100%; object-fit: cover"
+      />
+    </div>
+
+    <h1>
+      Hi, I'm <span class="name">Varsha Somayaji</span>
+    </h1>
+    <div class="subtitle">Computer Science Graduate</div>
+    <p class="description">
+      Passionate about creating innovative solutions through code.
+      Specialized in full-stack development, AI/ML, and building
+      user-centric applications.
+    </p>
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <a href="projects.html" class="btn-dark">View My Work</a>
+      <a href="contact.html" class="btn-light">Get In Touch</a>
+    </div>
+
+    <!-- Social Icons -->
+    <div class="social">
+      <a href="https://github.com/VARSHASREESOMAYAJI" aria-label="GitHub Profile"
+        ><i class="fab fa-github"></i
+      ></a>
+      <a
+        href="https://www.linkedin.com/in/varsha-sree-somayaji/"
+        aria-label="LinkedIn Profile"
+        ><i class="fab fa-linkedin"></i
+      ></a>
+      <a href="resume.pdf" aria-label="Download Resume"
+        ><i class="fas fa-download"></i
+      ></a>
+    </div>
+  </section>
+
+  <!-- Neon Rope Cursor -->
+  <canvas class="cursor-rope"></canvas>
+
+  <script>
+    const canvas = document.querySelector(".cursor-rope");
+    const ctx = canvas.getContext("2d");
+
+    let width, height;
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    let trail = [];
+
+    const TRAIL_LENGTH = 4;
+    let currentColor = getRandomNeonColor();
+    let isMoving = false;
+    let lastMoveTime = 0;
+    let ripples = [];
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    window.addEventListener("resize", resize);
+    resize();
+
+    window.addEventListener("mousemove", (e) => {
+      const now = Date.now();
+      if (!isMoving || now - lastMoveTime > 300) {
+        currentColor = getRandomNeonColor(); // new color when starting to move
+      }
+      isMoving = true;
+      lastMoveTime = now;
+
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+
+      trail.push({ x: mouse.x, y: mouse.y });
+
+      if (trail.length > TRAIL_LENGTH) {
+        trail.shift();
+      }
+    });
+
+    window.addEventListener("click", (e) => {
+      ripples.push({
+        x: e.clientX,
+        y: e.clientY,
+        radius: 0,
+        alpha: 1,
+        color: currentColor,
+      });
+    });
+
+    function getRandomNeonColor() {
+      const neonColors = [
+        "#ff00ff",
+        "#39ff14",
+        "#00ffff",
+        "#ff8c00",
+        "#ff1493",
+        "#7fff00",
+        "#00ffcc",
+      ];
+      return neonColors[Math.floor(Math.random() * neonColors.length)];
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw neon rope trail
+      ctx.beginPath();
+      for (let i = 0; i < trail.length - 1; i++) {
+        const p1 = trail[i];
+        const p2 = trail[i + 1];
+        const alpha = i / trail.length;
+        ctx.strokeStyle = currentColor;
+        ctx.shadowColor = currentColor;
+        ctx.shadowBlur = 20;
+        ctx.lineWidth = alpha * 8 + 1;
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Draw ripples
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${hexToRgb(r.color)}, ${r.alpha})`;
+        ctx.lineWidth = 2;
+        ctx.shadowColor = r.color;
+        ctx.shadowBlur = 10;
+        ctx.stroke();
+
+        r.radius += 2;
+        r.alpha -= 0.02;
+
+        if (r.alpha <= 0) {
+          ripples.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    function hexToRgb(hex) {
+      const bigint = parseInt(hex.replace("#", ""), 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return `${r}, ${g}, ${b}`;
+    }
+
+    animate();
+
+    // Magnetic effect on elements with class 'magnetic'
+    const magneticEls = document.querySelectorAll(".magnetic");
+
+    document.addEventListener("mousemove", (e) => {
+      magneticEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const dx = e.clientX - (rect.left + rect.width / 2);
+        const dy = e.clientY - (rect.top + rect.height / 2);
+        el.style.transform = `translate(${dx * 0.1}px, ${dy * 0.1}px)`;
+      });
+    });
+
+    document.addEventListener("mouseleave", () => {
+      magneticEls.forEach((el) => (el.style.transform = `translate(0, 0)`));
+    });
+  </script>
+</body>
+</html>

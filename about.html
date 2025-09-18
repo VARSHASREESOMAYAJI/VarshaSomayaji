@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Me</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(270deg, #ffe0f0, #e0f7ff, #fff7e0);
+      background-size: 600% 600%;
+      animation: bgAnimation 15s ease infinite;
+      color: #333;
+      padding: 2rem 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes bgAnimation {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.9);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      margin-bottom: 2rem;
+      width: 100%;
+       max-width: 1200px; 
+    
+    }
+
+    .nav-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .nav-icon:hover {
+      background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffb199);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: -22px;
+      background-color: #ff758c;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      opacity: 0;
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    .nav-icon:hover .tooltip {
+      opacity: 1;
+    }
+
+    h1 {
+      color: #ff497c;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 1rem auto 3rem;
+      font-size: 1.2rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .tag {
+      background-color: #e8eefc;
+      color: #1e2a3a;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    /* Horizontal Shuffling Boxes */
+    .box-grid {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding-left: 1rem;
+      max-width: 1200px;
+      width: 100%;
+      scroll-behavior: smooth;
+      margin-bottom: 4rem;
+    }
+
+    .box-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .box-grid::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    .box {
+      flex: 0 0 220px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
+      padding: 2.2rem 1.5rem 2rem;
+      text-align: center;
+      cursor: default;
+      -webkit-user-select: none;
+      user-select: none;
+      transition: background-color 0.8s ease, transform 0.6s ease;
+    }
+
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      background: #ddd;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 12px rgba(255 255 255 / 0.8);
+      transition: background-color 0.8s ease;
+      font-size: 28px;
+      color: #444;
+    }
+
+    .box h3 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .box p {
+      font-weight: 400;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .color1 { background-color: #ffe4e6; }
+    .color1 .icon-circle { background-color: #ffb8c4; }
+
+    .color2 { background-color: #d6ebff; }
+    .color2 .icon-circle { background-color: #87c1ff; }
+
+    .color3 { background-color: #dff5e1; }
+    .color3 .icon-circle { background-color: #a5d07e; }
+
+    .color4 { background-color: #fff2d3; }
+    .color4 .icon-circle { background-color: #ffd571; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="index.html" class="nav-icon" aria-label="Home">
+      <i class="fas fa-home"></i><span class="tooltip">Home</span>
+    </a>
+    <a href="about.html" class="nav-icon" aria-label="About">
+      <i class="fas fa-user"></i><span class="tooltip">About</span>
+    </a>
+    <a href="skills.html" class="nav-icon" aria-label="Skills">
+      <i class="fas fa-cogs"></i><span class="tooltip">Skills</span>
+    </a>
+    <a href="projects.html" class="nav-icon" aria-label="Projects">
+      <i class="fas fa-code"></i><span class="tooltip">Projects</span>
+    </a>
+    <a href="services.html" class="nav-icon" aria-label="Services">
+      <i class="fas fa-briefcase"></i><span class="tooltip">Services</span>
+    </a>
+    <a href="education.html" class="nav-icon" aria-label="Education">
+      <i class="fas fa-graduation-cap"></i><span class="tooltip">Education</span>
+    </a>
+    <a href="contact.html" class="nav-icon" aria-label="Contact">
+      <i class="fas fa-envelope"></i><span class="tooltip">Contact</span>
+    </a>
+  </nav>
+
+  <!-- About Me Section -->
+  <h1>About Me</h1>
+  <p class="intro">
+    Hi! I'm Varsha Somayaji, a passionate Computer Science graduate specialized in full-stack development and AI/ML.
+    I love turning complex problems into clean, user-friendly solutions.
+  </p>
+
+  <section>
+    <h2 style="text-align:center;">Areas of Interest</h2>
+    <div class="tags">
+      <span class="tag">Full-Stack Development</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">UI/UX Design</span>
+      <span class="tag">Cloud Computing</span>
+      <span class="tag">Open Source</span>
+      <span class="tag">Mobile Development</span>
+    </div>
+  </section>
+
+  <!-- Shuffling Boxes Section (Horizontal Scroll) -->
+  <section class="box-grid" id="boxGrid">
+    <article class="box color1" data-index="1">
+      <div class="icon-circle">🎯</div>
+      <h3>Goal Oriented</h3>
+      <p>Committed to delivering high-quality results on time, every time</p>
+    </article>
+    <article class="box color2" data-index="2">
+      <div class="icon-circle">&lt;/&gt;</div>
+      <h3>Problem Solver</h3>
+      <p>Love tackling complex challenges with elegant, efficient solutions</p>
+    </article>
+    <article class="box color3" data-index="3">
+      <div class="icon-circle">❤️</div>
+      <h3>User-Focused</h3>
+      <p>Passionate about creating meaningful experiences that users love</p>
+    </article>
+    <article class="box color4" data-index="4">
+      <div class="icon-circle">💡</div>
+      <h3>Innovation Driven</h3>
+      <p>Always exploring new technologies and pushing creative boundaries</p>
+    </article>
+  </section>
+
+  <!-- JS for Box Shuffling -->
+  <script>
+    const boxGrid = document.getElementById('boxGrid');
+    const boxes = Array.from(boxGrid.children);
+    const colors = ['color1', 'color2', 'color3', 'color4'];
+
+    function shuffleArray(arr) {
+      return arr.map(value => ({ value, sort: Math.random() }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value);
+    }
+
+    function shuffleBoxes() {
+      const shuffledBoxes = shuffleArray(boxes);
+      boxGrid.innerHTML = '';
+      shuffledBoxes.forEach((box, idx) => {
+        colors.forEach(c => box.classList.remove(c));
+        box.classList.add(colors[idx]);
+        boxGrid.appendChild(box);
+      });
+    }
+
+    setInterval(shuffleBoxes, 4000);
+  </script>
+
+</body>
+</html>

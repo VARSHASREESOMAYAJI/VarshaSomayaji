@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Services - Varsha Somayaji</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(270deg, #ffe0f0, #e0f7ff, #fff7e0);
+      background-size: 600% 600%;
+      animation: bgAnimation 15s ease infinite;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    @keyframes bgAnimation {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.9);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      margin-bottom: 2rem;
+      width: 100%;
+       max-width: 1200px; 
+    
+    }
+
+    .nav-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .nav-icon:hover {
+      background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffb199);
+      color: white;
+      transform: scale(1.1);
+    }
+    .tooltip {
+      position: absolute;
+      bottom: -18px;
+      background-color: #ff758c;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-size: 0.65rem;
+      opacity: 0;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .nav-icon:hover .tooltip {
+      opacity: 1;
+    }
+
+    main {
+      max-width: 900px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    h1 {
+      color: #ff497c;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      justify-items: center;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(255, 116, 134, 0.15);
+      padding: 1.2rem 1rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .service-card:nth-child(1) { transform: rotate(-1.5deg); }
+    .service-card:nth-child(2) { transform: rotate(1.5deg); }
+    .service-card:nth-child(3) { transform: rotate(1deg); }
+    .service-card:nth-child(4) { transform: rotate(-1deg); }
+
+    .service-card:hover {
+      transform: rotate(0) scale(1.03);
+      box-shadow: 0 20px 40px rgba(255, 116, 134, 0.3);
+      z-index: 10;
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      color: #ff497c;
+      background: #ffe0eb;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      box-shadow: 0 0 0 8px rgba(255 116 134 / 0.3);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+      background-color: #ff758c;
+      color: white;
+    }
+
+    .service-card h2 {
+      color: #ff497c;
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: #555;
+      margin: 0;
+    }
+
+    .btn-group {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.7rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-contact, .btn-alt {
+      text-decoration: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      box-shadow: 0 3px 10px rgba(255, 116, 134, 0.15);
+    }
+
+    .btn-contact {
+      background-color: #ff497c;
+      color: white;
+    }
+
+    .btn-contact:hover {
+      background-color: #d63384;
+      transform: scale(1.05);
+    }
+
+    .btn-alt {
+      background-color: white;
+      color: #ff497c;
+      border: 2px solid #ff497c;
+    }
+
+    .btn-alt:hover {
+      background-color: #ffe0eb;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .services-container {
+        grid-template-columns: 1fr;
+      }
+      .service-card {
+        transform: rotate(0) !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-icon" aria-label="Home"><i class="fas fa-home"></i><span class="tooltip">Home</span></a>
+  <a href="about.html" class="nav-icon" aria-label="About"><i class="fas fa-user"></i><span class="tooltip">About</span></a>
+  <a href="skills.html" class="nav-icon" aria-label="Skills"><i class="fas fa-cogs"></i><span class="tooltip">Skills</span></a>
+  <a href="projects.html" class="nav-icon" aria-label="Projects"><i class="fas fa-code"></i><span class="tooltip">Projects</span></a>
+  <a href="services.html" class="nav-icon" aria-label="Services"><i class="fas fa-briefcase"></i><span class="tooltip">Services</span></a>
+  <a href="education.html" class="nav-icon" aria-label="Education"><i class="fas fa-graduation-cap"></i><span class="tooltip">Education</span></a>
+  <a href="contact.html" class="nav-icon" aria-label="Contact"><i class="fas fa-envelope"></i><span class="tooltip">Contact</span></a>
+</nav>
+
+<main>
+  <h1>My Services</h1>
+
+  <div class="services-container">
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+      <h2>Web Development</h2>
+      <p>Responsive, modern websites built with the latest technologies like HTML, CSS, JavaScript, React, and Node.js.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-robot"></i></div>
+      <h2>AI & Machine Learning</h2>
+      <p>Developing intelligent models and automations that streamline business processes and enhance productivity.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h2>App Development</h2>
+      <p>Creating cross-platform mobile apps with smooth UX using Flutter and React Native.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+      <h2>UI/UX Design</h2>
+      <p>Designing clean, intuitive interfaces that keep users engaged and satisfied.</p>
+    </div>
+  </div>
+
+ <div class="btn-group">
+  <a href="contact.html" class="btn-contact">Connect with Me</a>
+  <a href="https://www.linkedin.com/messaging/thread/new/?recipients=varsha-sree-somayaji" target="_blank" rel="noopener noreferrer" class="btn-alt">Message Me on LinkedIn</a>
+</div>
+
+  
+</main>
+
+</body>
+</html>

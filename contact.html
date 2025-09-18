@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact - Varsha Somayaji</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(270deg, #ffe0f0, #e0f7ff, #fff7e0);
+      background-size: 600% 600%;
+      animation: bgAnimation 12.5s ease infinite;
+      text-align: center;
+      padding: 2rem;
+    }
+    @keyframes bgAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.8);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      -webkit-backdrop-filter: 8px;
+      backdrop-filter: blur(8px);
+      margin-bottom: 2rem;
+    }
+    .nav-icon {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .nav-icon:hover {
+      background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffb199);
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .tooltip {
+      position: absolute;
+      bottom: -22px;
+      background-color: #ff758c;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .nav-icon:hover .tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h1 {
+      color: #ff758c;
+      margin-bottom: 1rem;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: left;
+      color: #444;
+      font-size: 1.1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    button {
+      background: #ff497c;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #ff758c;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-icon" aria-label="Home">
+      <i class="fas fa-home"></i>
+      <span class="tooltip">Home</span>
+    </a>
+    <a href="about.html" class="nav-icon" aria-label="About">
+      <i class="fas fa-user"></i>
+      <span class="tooltip">About</span>
+    </a>
+    <a href="skills.html" class="nav-icon" aria-label="Skills">
+      <i class="fas fa-cogs"></i>
+      <span class="tooltip">Skills</span>
+    </a>
+    <a href="projects.html" class="nav-icon" aria-label="Projects">
+      <i class="fas fa-code"></i>
+      <span class="tooltip">Projects</span>
+    </a>
+    <a href="services.html" class="nav-icon" aria-label="Services">
+      <i class="fas fa-briefcase"></i>
+      <span class="tooltip">services</span>
+    </a>
+    <a href="education.html" class="nav-icon" aria-label="Education">
+      <i class="fas fa-graduation-cap"></i>
+      <span class="tooltip">Education</span>
+    </a>
+    <a href="contact.html" class="nav-icon" aria-label="Contact">
+      <i class="fas fa-envelope"></i>
+      <span class="tooltip">Contact</span>
+    </a>
+  </nav>
+
+  <main>
+    <h1>Contact Me</h1>
+    <form action="mailto:your.email@example.com" method="post" enctype="text/plain">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </main>
+</body>
+</html>
