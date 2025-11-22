@@ -14,9 +14,10 @@
       animation: bgAnimation 12.5s ease infinite;
       padding: 2rem;
       color: #333;
-      height: 100vh;
-      overflow: hidden; /* prevent full-page scroll */
+      min-height: 100vh;
+      box-sizing: border-box;
     }
+
     @keyframes bgAnimation {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -33,7 +34,9 @@
       border-radius: 0 0 15px 15px;
       backdrop-filter: blur(8px);
       margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
+
     .nav-icon {
       position: relative;
       display: flex;
@@ -49,12 +52,14 @@
       transition: all 0.3s ease;
       text-decoration: none;
     }
+
     .nav-icon:hover {
       background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffb199);
       color: white;
       transform: scale(1.1);
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+
     .tooltip {
       position: absolute;
       bottom: -22px;
@@ -70,24 +75,24 @@
       transition: all 0.2s ease;
       z-index: 10;
     }
+
     .nav-icon:hover .tooltip {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* === Container for timeline + details === */
     .container {
       display: flex;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       background: rgba(255, 255, 255, 0.85);
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       overflow: hidden;
-      height: calc(100vh - 7rem); /* Adjust based on nav and padding */
+      height: auto;
+      flex-direction: row;
     }
 
-    /* === Timeline on left === */
     .timeline {
       position: relative;
       width: 35%;
@@ -95,38 +100,40 @@
       padding: 2rem 1.5rem;
       box-sizing: border-box;
       border-right: 2px solid #ff758c;
-
-      /* ADD these lines to make it scrollable */
       overflow-y: auto;
-      max-height: 100%;
+      height: auto;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      top: 2rem;
-      bottom: 2rem;
+      top: 0;
       left: 32px;
       width: 4px;
+      height: 100%;
       background: linear-gradient(180deg, #ff758c, #ff7eb3);
       border-radius: 2px;
       z-index: 1;
     }
+
     .timeline-item {
       position: relative;
       padding-left: 70px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       cursor: pointer;
       transition: background 0.3s ease;
       border-radius: 8px;
     }
+
     .timeline-item:hover {
       background: #ffd5e1;
     }
+
     .timeline-item.active {
       background: #ffb6c1;
       font-weight: bold;
     }
+
     .timeline-item .circle {
       position: absolute;
       top: 10px;
@@ -139,34 +146,38 @@
       z-index: 2;
       transition: background 0.3s ease;
     }
+
     .timeline-item.active .circle {
       background: #ff2b63;
       box-shadow: 0 0 8px #ff497c;
     }
+
     .timeline-item h3 {
       margin: 0 0 0.2rem 0;
       font-size: 1rem;
       color: #d1003a;
     }
+
     .timeline-item small {
       color: #999;
       font-size: 0.8rem;
     }
 
-    /* === Details content on right === */
     .details {
       width: 65%;
-      padding: 3rem 2rem;
+      padding: 2rem;
       box-sizing: border-box;
       color: #333;
       overflow-y: auto;
     }
+
     .details h2 {
       margin-top: 0;
       color: #ff497c;
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
     }
+
     .details p {
       font-size: 1rem;
       line-height: 1.5;
@@ -174,177 +185,164 @@
       margin-bottom: 1rem;
     }
 
-    /* Responsive */
+    .details img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    /* === Responsive Fix === */
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
-        min-height: auto;
         height: auto;
       }
+
       .timeline, .details {
         width: 100%;
+        height: auto;
+      }
+
+      .timeline {
+        border-right: none;
+        border-bottom: 2px solid #ff758c;
         padding: 1.5rem;
       }
+
       .timeline::before {
         left: 20px;
-        top: 50px;
-        height: calc(100% - 100px);
       }
+
       .timeline-item {
-        padding-left: 50px;
+        padding-left: 60px;
+        margin-bottom: 1.5rem;
       }
+
       .timeline-item .circle {
-        left: 5px;
+        left: 10px;
+        width: 15px;
+        height: 15px;
+      }
+
+      .details h2 {
+        font-size: 1.5rem;
+      }
+
+      .details p {
+        font-size: 0.95rem;
+      }
+
+      .details img {
+        max-height: 200px;
       }
     }
-
   </style>
 </head>
 <body>
   <nav>
-    <a href="index.html" class="nav-icon" aria-label="Home">
-      <i class="fas fa-home"></i>
-      <span class="tooltip">Home</span>
-    </a>
-    <a href="about.html" class="nav-icon" aria-label="About">
-      <i class="fas fa-user"></i>
-      <span class="tooltip">About</span>
-    </a>
-    <a href="skills.html" class="nav-icon" aria-label="Skills">
-      <i class="fas fa-cogs"></i>
-      <span class="tooltip">Skills</span>
-    </a>
-    <a href="projects.html" class="nav-icon" aria-label="Projects">
-      <i class="fas fa-code"></i>
-      <span class="tooltip">Projects</span>
-    </a>
-    <a href="services.html" class="nav-icon" aria-label="Services">
-      <i class="fas fa-briefcase"></i>
-      <span class="tooltip">Services</span>
-    </a>
-    <a href="education.html" class="nav-icon" aria-label="Education">
-      <i class="fas fa-graduation-cap"></i>
-      <span class="tooltip">Education</span>
-    </a>
-    <a href="contact.html" class="nav-icon" aria-label="Contact">
-      <i class="fas fa-envelope"></i>
-      <span class="tooltip">Contact</span>
-    </a>
+    <a href="index.html" class="nav-icon"><i class="fas fa-home"></i><span class="tooltip">Home</span></a>
+    <a href="about.html" class="nav-icon"><i class="fas fa-user"></i><span class="tooltip">About</span></a>
+    <a href="skills.html" class="nav-icon"><i class="fas fa-cogs"></i><span class="tooltip">Skills</span></a>
+    <a href="allpro.html" class="nav-icon"><i class="fas fa-code"></i><span class="tooltip">Projects</span></a>
+    <a href="services.html" class="nav-icon"><i class="fas fa-briefcase"></i><span class="tooltip">Services</span></a>
+    <a href="education.html" class="nav-icon"><i class="fas fa-graduation-cap"></i><span class="tooltip">Education</span></a>
+    <a href="contact.html" class="nav-icon"><i class="fas fa-envelope"></i><span class="tooltip">Contact</span></a>
   </nav>
 
   <main>
     <div class="container">
-      <div class="timeline" id="timeline">
-        <div class="timeline-item active" id="education-toggle" data-type="education">
-          <div class="circle"></div>
-          <h3>Education</h3>
-          <small>Click to see details</small>
-        </div>
-
-        <hr style="border-color:#ff758c; margin: 2rem 0;">
-
-        <div class="timeline-item" data-title="Certificate 1: AWS for Games - Databases" data-desc="Completed AWS database course focused on gaming databases." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 1: AWS for Games - Databases</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 2: AWS for Games - Use Cases" data-desc="Learned various AWS use cases for games." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 2: AWS for Games - Use Cases</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 3: Migration Support and Tools" data-desc="Mastered AWS migration tools and techniques." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 3: Migration Support and Tools</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-        <div class="timeline-item" data-title="Certificate 4: Course Conclusion" data-desc="Summary and final thoughts on AWS databases for games, including resources for further learning." data-type="single">
-          <div class="circle"></div>
-          <h3>Certificate 4: Course Conclusion</h3>
-          <small>Completed</small>
-        </div>
-
-      </div>
-
-      <div class="details" id="details">
-        <!-- Content updated dynamically -->
-      </div>
+      <div class="timeline" id="timeline"></div>
+      <div class="details" id="details"></div>
     </div>
   </main>
 
   <script>
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    const details = document.getElementById('details');
+    const certificates = [
+      { title: "Education", type: "education" },
+      {
+        title: "ServiceNow CSA - Jun 2025",
+        desc: "Completed the ServiceNow Certified System Administrator (CSA) certification...",
+        image: "certificates/csa.png"
+      },
+      {
+        title: "ServiceNow CAD - Jun 2025",
+        desc: "Achieved ServiceNow Certified Application Developer (CAD) certification...",
+        image: "certificates/cad.png"
+      },
+      {
+        title: "DSA - SmartInterviews - Jul 2025",
+        desc: "Completed a rigorous Data Structures & Algorithms course with SmartInterviews...",
+        image: "certificates/dsa.png"
+      },
+      {
+        title: "Introduction to MongoDB - May 2024",
+        desc: "Learned fundamentals of MongoDB including CRUD operations...",
+        image: "certificates/mongodb.png"
+      },
+      {
+        title: "UI/UX - GUVI",
+        desc: "Gained hands-on experience in designing intuitive interfaces...",
+        image: "certificates/uiux.png"
+      },
+      {
+        title: "Linux Essentials - edX",
+        desc: "Learned foundational Linux commands, file system navigation...",
+        image: "certificates/linux.png"
+      },
+      {
+        title: "Python for Data Science - edX",
+        desc: "Learned Python fundamentals with a focus on data science applications...",
+        image: "certificates/python.png"
+      }
+    ];
 
-    const educationDetailsHTML = `
+    const timeline = document.getElementById("timeline");
+    const details = document.getElementById("details");
+
+    const educationHTML = `
       <h2>Education</h2>
-      <p><strong>Bachelor of Technology in Computer Science</strong><br>
-      Srinivasa Ramanujan Institute Of Technology - 2022 to 2026</p>
-      <p><strong>High School Diploma</strong><br>
-      Narayana High School - 2020 to 2022</p>
-      <p><strong>SSC</strong><br>
-      Narayana - 2019-2020</p>
+      <p><strong>B.Tech in Computer Science</strong><br>Srinivasa Ramanujan Institute Of Technology (2022 - 2026)<br>8 CGPA</p>
+      <p><strong>High School</strong><br>Narayana Junior College (2020 - 2022)<br>82% - CBSE</p>
+      <p><strong>SSC</strong><br>Narayana High School (2019 - 2020)<br>99% - AP SSC</p>
     `;
 
-    timelineItems.forEach(item => {
-      item.addEventListener('click', () => {
-        timelineItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-
-        if (item.dataset.type === 'education') {
-          details.innerHTML = educationDetailsHTML;
-        } else {
-          details.innerHTML = `<h2>${item.dataset.title}</h2><p>${item.dataset.desc}</p>`;
-        }
-      });
+    certificates.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "timeline-item" + (index === 0 ? " active" : "");
+      div.dataset.index = index;
+      div.innerHTML = `
+        <div class="circle"></div>
+        <h3>${item.title.split(" - ")[0]}</h3>
+        <small>${item.title.includes("-") ? item.title.split(" - ")[1] : "Click to see details"}</small>
+      `;
+      timeline.appendChild(div);
     });
 
-    document.getElementById('education-toggle').click();
+    function updateDetails(index) {
+      const items = document.querySelectorAll(".timeline-item");
+      items.forEach(i => i.classList.remove("active"));
+      items[index].classList.add("active");
+
+      const item = certificates[index];
+      if (item.type === "education") {
+        details.innerHTML = educationHTML;
+      } else {
+        details.innerHTML = `
+          <h2>${item.title}</h2>
+          <p>${item.desc}</p>
+          <img src="${item.image}" alt="${item.title}" />
+        `;
+      }
+    }
+
+    document.querySelectorAll(".timeline-item").forEach((item, index) => {
+      item.addEventListener("click", () => updateDetails(index));
+    });
+
+    updateDetails(0);
   </script>
 </body>
 </html>

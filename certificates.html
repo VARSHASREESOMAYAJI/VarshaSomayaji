@@ -1,9 +1,9 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Resume</title>
+  <title>My Resume</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
     /* Add this CSS inside your existing styles.css or in a <style> block */
@@ -45,12 +45,26 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
     }
     .cert-content img {
       max-width: 100%;
       max-height: 400px;
       border-radius: 8px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+    .cert-content .view-cert-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .cert-content .view-cert-btn:hover {
+      background-color: #003d80;
     }
   </style>
 </head>
@@ -65,14 +79,19 @@
       <nav class="cert-sidebar">
         <h2>Certificates</h2>
         <ul class="cert-list">
-          <li class="active" data-img="cert1.jpg">Certificate 1</li>
-          <li data-img="cert2.jpg">Certificate 2</li>
-          <li data-img="cert3.jpg">Certificate 3</li>
-          <li data-img="cert4.jpg">Certificate 4</li>
+          <li class="active" data-img="servicenow_csa.jpg" data-cert-url="https://www.example.com/servicenow_csa">ServiceNow CSA - Jun 2025</li>
+          <li data-img="servicenow_cad.jpg" data-cert-url="https://www.example.com/servicenow_cad">ServiceNow CAD - Jun 2025</li>
+          <li data-img="dsa_smartinterviews.jpg" data-cert-url="https://www.example.com/dsa_smartinterviews">DSA - SmartInterviews - Jul 2025</li>
+          <li data-img="mongodb_introduction.jpg" data-cert-url="https://www.example.com/mongodb_introduction">Introduction to MongoDB Students - May 2024</li>
+          <li data-img="linux_edx.jpg" data-cert-url="https://www.example.com/linux_edx">Linux - edX - Mar 2024</li>
+          <li data-img="figma_martel.jpg" data-cert-url="https://www.example.com/figma_martel">Figma Martel - HCLxGuvi - Mar 2024</li>
+          <li data-img="postgresql_codecademy.jpg" data-cert-url="https://www.example.com/postgresql_codecademy">PostgreSQL - Codecademy - Nov 2023</li>
+          <li data-img="python_edx.jpg" data-cert-url="https://www.example.com/python_edx">Python - edX</li>
         </ul>
       </nav>
       <div class="cert-content">
-        <img id="cert-image" src="cert1.jpg" alt="Certificate 1" />
+        <img id="cert-image" src="servicenow_csa.jpg" alt="ServiceNow CSA" />
+        <button id="view-cert-btn" class="view-cert-btn" onclick="window.open('https://www.example.com/servicenow_csa', '_blank')">View Certificate</button>
       </div>
     </div>
     <!-- Certificates Section End -->
@@ -82,13 +101,20 @@
   <script>
     const certItems = document.querySelectorAll('.cert-list li');
     const certImage = document.getElementById('cert-image');
+    const certButton = document.getElementById('view-cert-btn');
 
     certItems.forEach(item => {
       item.addEventListener('click', () => {
+        // Remove active class from all items
         certItems.forEach(i => i.classList.remove('active'));
+
+        // Add active class to the clicked item
         item.classList.add('active');
+
+        // Update image and button link based on selected certificate
         certImage.src = item.getAttribute('data-img');
         certImage.alt = item.textContent;
+        certButton.onclick = () => window.open(item.getAttribute('data-cert-url'), '_blank');
       });
     });
   </script>

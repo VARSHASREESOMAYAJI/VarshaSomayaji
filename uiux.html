@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UI/UX Prototypes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fae5a0, #cfecf4);
+      color: #333;
+      min-height: 100vh;
+      padding: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.9);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .nav-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .nav-icon:hover {
+      background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffb199);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    h1 {
+      color: #ff497c;
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+      font-weight: 800;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .project-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #555;
+    }
+
+    .back-link {
+      margin-top: 2rem;
+      text-decoration: none;
+      color: #333;
+      border: 1px solid #ccc;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .back-link:hover {
+      background: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="index.html" class="nav-icon"><i class="fas fa-home"></i></a>
+    <a href="projects.html" class="nav-icon"><i class="fas fa-arrow-left"></i></a>
+  </nav>
+
+  <!-- Page Title -->
+  <h1>UI/UX Prototypes</h1>
+
+  <!-- Projects -->
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-title">Portfolio Website</div>
+      <div class="project-desc">A modern personal portfolio built with HTML, CSS, and JavaScript featuring smooth animations and responsive design.</div>
+    </div>
+    <div class="project-card">
+      <div class="project-title">Landing Page Clone</div>
+      <div class="project-desc">Pixel-perfect recreation of a marketing landing page with advanced CSS layout techniques and JavaScript interactivity.</div>
+    </div>
+    <!-- Add more projects here -->
+  </div>
+
+  <a class="back-link" href="projects.html">← Back to Categories</a>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projects</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root { --accent:#ff4fa3; --muted:#6b6b74; --card-bg:#ffffff; --radius:14px; }
+    html, body { height:100%; margin:0; }
+    body {
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:2rem 1rem;
+      min-height:100vh;
+      background: linear-gradient(270deg, #ffe0f0, #e0f7ff, #fff7e0);
+      background-size: 600% 600%;
+      animation: bgAnimation 12.5s ease infinite;
+    }
+    @keyframes bgAnimation { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .container { width:100%; max-width:1160px; margin:0 auto; }
+
+    nav {
+      display:flex; justify-content:center; gap:1rem;
+      background: rgba(255,255,255,0.8); padding:0.5rem 1rem;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1); border-radius:0 0 15px 15px;
+      backdrop-filter: blur(8px); margin-bottom:2rem; flex-wrap:wrap;
+      position:sticky; top:0; z-index:10;
+    }
+    .nav-icon { position:relative; display:flex; align-items:center; justify-content:center; width:45px; height:45px; border-radius:12px; background:white; color:black; font-size:1.2rem; transition:all .3s; text-decoration:none; }
+    .nav-icon:hover { background:linear-gradient(45deg,#ff7eb3,#ff758c,#ffb199); color:white; transform:scale(1.1); box-shadow:0 4px 10px rgba(0,0,0,.2); }
+    .tooltip { position:absolute; bottom:-22px; background-color:#ff758c; color:white; padding:3px 8px; border-radius:6px; font-size:.7rem; white-space:nowrap; opacity:0; transform:translateY(4px); pointer-events:none; transition:all .2s; z-index:10; }
+    .nav-icon:hover .tooltip { opacity:1; transform:translateY(0); }
+
+    header { text-align:center; margin:28px 0 18px; }
+    h1 { margin:0; font-size:34px; color:var(--accent); font-weight:800; letter-spacing:-0.6px; }
+    .lead { margin-top:10px; color:var(--muted); font-size:14px; }
+
+    .controls { display:flex; gap:12px; align-items:center; justify-content:space-between; margin:20px 0; flex-wrap:wrap; }
+    .count-pill { background:#fff; padding:8px 14px; border-radius:999px; box-shadow:0 6px 12px rgba(20,20,30,0.04); font-weight:600; color:#333; display:inline-flex; gap:8px; align-items:center; }
+    .search { display:flex; align-items:center; gap:8px; background:var(--card-bg); padding:8px 12px; border-radius:999px; box-shadow:0 6px 12px rgba(20,20,30,0.04); min-width:220px; }
+    .search input { border:0; outline:0; font-size:14px; background:transparent; width:100%; }
+
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-bottom:34px; }
+    .project-card { background:var(--card-bg); border-radius:var(--radius); padding:18px; box-shadow:0 10px 30px rgba(20,20,30,0.06); display:flex; flex-direction:column; gap:12px; transition:transform .18s cubic-bezier(.2,.9,.3,1), box-shadow .18s ease; cursor:default; }
+    .project-card:hover { transform:translateY(-8px); box-shadow:0 18px 44px rgba(20,20,30,0.08); }
+    .project-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .project-title { font-size:18px; font-weight:700; color:var(--accent); margin:0; }
+    .project-tag { font-size:12px; color:var(--muted); background:#fff7fb; padding:6px 8px; border-radius:8px; font-weight:600; }
+    .project-desc { color:var(--muted); font-size:14px; line-height:1.5; margin:0; flex:1; }
+    .project-meta { display:flex; gap:10px; align-items:center; margin-top:8px; }
+
+    .btn { display:inline-flex; align-items:center; gap:8px; border:0; padding:8px 12px; font-weight:700; font-size:13px; border-radius:10px; cursor:pointer; text-decoration:none; }
+    .btn-primary { background:var(--accent); color:white; box-shadow:0 8px 18px rgba(255,79,163,0.12); }
+    .btn-ghost { background:transparent; color:var(--muted); border:1px solid rgba(20,20,30,0.04); }
+
+    .modal-backdrop { position:fixed; inset:0; background:rgba(10,10,12,0.45); display:none; align-items:center; justify-content:center; z-index:60; padding:20px; }
+    .modal { background:var(--card-bg); max-width:760px; width:100%; border-radius:12px; padding:20px; box-shadow:0 20px 60px rgba(20,20,30,0.5); }
+    .modal h3 { margin:0 0 8px 0; color:var(--accent); }
+    .modal p { color:var(--muted); margin:0 0 12px 0; line-height:1.45; }
+    .modal .meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+
+    @media (max-width:520px){
+      h1 { font-size:22px; }
+      .controls { flex-direction:column; align-items:stretch; gap:12px; }
+      .search { width:100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- NAV -->
+    <nav>
+      <a href="index.html" class="nav-icon"><i class="fas fa-home"></i><span class="tooltip">Home</span></a>
+      <a href="about.html" class="nav-icon"><i class="fas fa-user"></i><span class="tooltip">About</span></a>
+      <a href="skills.html" class="nav-icon"><i class="fas fa-cogs"></i><span class="tooltip">Skills</span></a>
+      <a href="allpro.html" class="nav-icon"><i class="fas fa-code"></i><span class="tooltip">Projects</span></a>
+      <a href="services.html" class="nav-icon"><i class="fas fa-briefcase"></i><span class="tooltip">Services</span></a>
+      <a href="education.html" class="nav-icon"><i class="fas fa-graduation-cap"></i><span class="tooltip">Education</span></a>
+      <a href="contact.html" class="nav-icon"><i class="fas fa-envelope"></i><span class="tooltip">Contact</span></a>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+      <h1>My Projects</h1>
+      <div class="lead"><h2>Rome wasn’t built in a day, neither were my projects...!</h2></div>
+    </header>
+
+    <!-- CONTROLS -->
+    <div class="controls" role="region" aria-label="Project controls">
+      <div class="count-pill"><strong id="project-count">0</strong> Projects</div>
+      <label class="search" aria-label="Search projects">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input id="search-input" type="search" placeholder="Search by name, tech or tag" aria-label="Search projects">
+      </label>
+    </div>
+
+    <!-- GRID -->
+    <main class="projects-grid" id="projectsGrid" aria-live="polite"></main>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document" aria-label="Project details">
+      <button id="modalClose" class="btn btn-ghost" style="float:right">Close</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+      <div class="meta" id="modalMeta"></div>
+      <div style="display:flex; gap:10px;">
+        <a id="modalGithub" class="btn btn-primary" href="#" target="_blank" rel="noopener">View GitHub</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const projects = [
+      //{ id:'hivel-assessment', title:'Hivel Assessment (Java) — Automated Test Runner', desc:'Java-based assessment harness for coding problems; includes test case execution and result parsing.', tags:['Java','Testing','Assessment'], github:'https://github.com/VARSHASREESOMAYAJI/HivelAssesment' },
+      { id:'pr-agent', title:'Pull Request Agent — PR Automation Toolkit', desc:'Python utility to automate PR workflows and perform lightweight checks for maintainers.', tags:['Python','Automation','CI'], github:'https://github.com/VARSHASREESOMAYAJI/Pull-Request-AGENT' },
+      { id:'engprod-bottleneck-detector', title:'EngProd Bottleneck Detector — DORA Metrics Analyzer', desc:'Python pipeline for collecting DORA metrics and detecting anomalies in delivery performance.', tags:['Python','Analytics','DORA'], github:'https://github.com/VARSHASREESOMAYAJI/Engineering-Productivity-Bottleneck-Detector' },
+      { id:'pr-intel-engine', title:'PR Intelligence Engine — AI Pull-Request Insights', desc:'Prototype for extracting PR signals and surfacing AI-driven reviewer suggestions.', tags:['Python','NLP','ML'], github:'https://github.com/VARSHASREESOMAYAJI/AI-Driven-Pull-Request-Intelligence-Engine' },
+      { id:'cinema-snacks', title:'Cinema Snack Shop — Order Management (Django)', desc:'Theatre snack ordering and seat-side delivery system with order management and kitchen dashboard.', tags:['Django','Orders','Payments','Python'], github:'https://github.com/VARSHASREESOMAYAJI/Movie_Snacks' },
+      { id:'sowey-furni', title:'Sowey Furni — Furniture Marketplace (Django)', desc:'Full-stack furniture marketplace with conversational chatbot and AR preview. Django backend, Tailwind frontend, PostgreSQL.', tags:['Django','Tailwind','Python','Postgres','AR'], github:'https://github.com/VARSHASREESOMAYAJI/Sowey-Dowey' },
+      { id:'ebook-marketplace', title:'eBook Marketplace — Flask Checkout Flow', desc:'Interactive eBook storefront with cart and payment integration (Flask) — demo checkout flow.', tags:['Flask','Payments','Frontend','Python'], github:'https://github.com/VARSHASREESOMAYAJI/ebook-app' },
+      { id:'retail-dataset', title:'Retail Dataset — Curated Data & EDA', desc:'Curated retail dataset with exploratory data analysis and preprocessing notebooks.', tags:['Data','Pandas','EDA'], github:'https://github.com/VARSHASREESOMAYAJI/RetailDataSet' },
+      { id:'retail-analytics', title:'Retail Analytics Suite — Strategy & Dashboards', desc:'Analysis notebooks and dashboards for retail strategy, cohorting, and KPIs.', tags:['Analytics','Dashboards','Python'], github:'https://github.com/VARSHASREESOMAYAJI/Retail-Strategy-and-Analytics' },
+      { id:'data-viz', title:'Data Visualization — Interactive Charts', desc:'Collection of interactive visualizations demonstrating charting libraries and insights.', tags:['D3','Charts','Visualization'], github:'https://github.com/VARSHASREESOMAYAJI/DataVizualization' },
+      { id:'multi-qr', title:'Multi QR Generator — Batch QR Utility', desc:'Batch convert text and URLs to downloadable QR codes with export options — tiny Flask utility.', tags:['Flask','Python','QR','Utility'], github:'https://github.com/VARSHASREESOMAYAJI/multi_qr_generator' },
+      { id:'pdf-eraser', title:'PDF Redactor — Privacy-first PDF Toolkit', desc:'Python toolset for removing or redacting sensitive content from PDFs programmatically.', tags:['Python','PDF','Security'], github:'https://github.com/VARSHASREESOMAYAJI/PDF-eraser' },
+      { id:'ai-resume', title:'AI Resume Builder — Resume Analysis Prototype', desc:'Frontend prototype for resume scoring and AI-driven suggestion pipeline.', tags:['AI','Frontend','NLP'], github:'https://github.com/VARSHASREESOMAYAJI/AI-RESUME' },
+      { id:'theme-switch', title:'Theme Switch Component — Accessibility-focused', desc:'Standalone theme switcher component with CSS variables and accessible controls.', tags:['HTML','CSS','Component'], github:'https://github.com/VARSHASREESOMAYAJI/ThemeSwitch' },
+      { id:'minimal-clock', title:'Minimal Digital Clock — React Hooks Demo', desc:'React component demo showcasing hooks and state for time updates — small UI exercise.', tags:['React','Component','Hooks'], github:'https://github.com/VARSHASREESOMAYAJI/Digital-Clock' },
+      { id:'weather-peek', title:'Weather Peek — Real-time Forecast Dashboard', desc:'Minimal real-time forecast dashboard that consumes public weather APIs; responsive UI.', tags:['API','JavaScript','HTML','Responsive'], github:'https://github.com/VARSHASREESOMAYAJI/Weather-app' },
+      { id:'bmi-app', title:'BMI Tracker — Simple Health Calculator', desc:'Lightweight BMI calculator with form validation and result interpretation.', tags:['JavaScript','Forms','Validation'], github:'https://github.com/VARSHASREESOMAYAJI/bmi_app' },
+      //{ id:'portfolio-site', title:'Personal Portfolio — Static Site', desc:'Personal portfolio site built with HTML/CSS to showcase projects and contact info.', tags:['HTML','CSS','Portfolio'], github:'https://github.com/VARSHASREESOMAYAJI/VarshaSomayaji' },
+    ];
+
+    const grid = document.getElementById('projectsGrid');
+    const countEl = document.getElementById('project-count');
+    const searchInput = document.getElementById('search-input');
+
+    function render(list) {
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'project-card';
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', p.title + ' — Open details');
+
+        card.innerHTML = `
+          <div class="project-head">
+            <h4 class="project-title">${p.title}</h4>
+            <div class="project-tag">${p.tags[0] || ''}</div>
+          </div>
+          <p class="project-desc">${p.desc}</p>
+          <div class="project-meta">
+            <button class="btn btn-primary" data-id="${p.id}"><i class="fas fa-info-circle"></i> Details</button>
+            <a class="btn btn-ghost" href="${p.github}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>
+          </div>
+        `;
+        card.querySelector('.btn.btn-primary').addEventListener('click', ()=> openModal(p.id));
+        grid.appendChild(card);
+      });
+      countEl.textContent = list.length;
+    }
+
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalMeta = document.getElementById('modalMeta');
+    const modalGithub = document.getElementById('modalGithub');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(id){
+      const p = projects.find(x => x.id === id);
+      if(!p) return;
+      modalTitle.textContent = p.title;
+      modalDesc.textContent = p.desc;
+      modalMeta.innerHTML = '';
+      p.tags.forEach(t=>{
+        const el = document.createElement('div');
+        el.className = 'project-tag';
+        el.style.padding = '6px 10px';
+        el.textContent = t;
+        modalMeta.appendChild(el);
+      });
+      modalGithub.href = p.github || '#';
+      modalBackdrop.style.display = 'flex';
+      modalBackdrop.setAttribute('aria-hidden','false');
+      modalClose.focus();
+    }
+
+    function closeModal(){
+      modalBackdrop.style.display = 'none';
+      modalBackdrop.setAttribute('aria-hidden','true');
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', (e)=>{ if(e.target===modalBackdrop) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    function filterProjects(q){
+      if(!q) return projects;
+      q=q.trim().toLowerCase();
+      return projects.filter(p=>p.title.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.tags.join(' ').toLowerCase().includes(q));
+    }
+
+    searchInput.addEventListener('input',(e)=>{
+      const list = filterProjects(e.target.value);
+      render(list);
+    });
+
+    render(projects);
+  </script>
+</body>
+</html>

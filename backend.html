@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Backend Projects - Anything to QR</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      color: #333;
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .nav-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .nav-icon:hover {
+      background: linear-gradient(45deg, #4facfe, #00f2fe);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    h1 {
+      color: #0099cc;
+      font-weight: 800;
+      font-size: 2.4rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .dice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .dice {
+      width: 200px;
+      height: 200px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .dice-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .dice.flipped .dice-inner {
+      transform: rotateY(180deg);
+    }
+
+    .dice-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f0faff, #d2e3f3);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      backface-visibility: hidden;
+      padding: 1.5rem;
+      color: #333;
+      user-select: none;
+    }
+
+    .face-front {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #0077b6;
+      border: 3px solid #00a8e8;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .face-front .icon {
+      font-size: 3rem;
+    }
+
+    .face-back {
+      transform: rotateY(180deg);
+      background: #00b4d8;
+      color: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 25px rgba(0, 180, 216, 0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .tech-stack {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .project-links {
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-links a {
+      background: white;
+      color: #0077b6;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .project-links a:hover {
+      background: #0077b6;
+      color: white;
+    }
+
+    @media (max-width: 500px) {
+      .dice {
+        width: 160px;
+        height: 160px;
+      }
+      .face-front {
+        font-size: 1.6rem;
+      }
+      .face-front .icon {
+        font-size: 2.5rem;
+      }
+      .face-back {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="nav-icon" title="Home"><i class="fas fa-home"></i></a>
+    <a href="projects.html" class="nav-icon" title="Back to Categories"><i class="fas fa-arrow-left"></i></a>
+  </nav>
+
+  <!-- Page Title -->
+  <h1>Backend Projects</h1>
+
+  <!-- Dice Grid -->
+  <div class="dice-grid">
+
+    <!-- Backend Project Card: Anything to QR -->
+    <div class="dice" tabindex="0" aria-label="Anything to QR Project Card">
+      <div class="dice-inner">
+        <div class="dice-face face-front">
+          <div class="icon">🔗</div>
+          <div>Anything to QR</div>
+        </div>
+        <div class="dice-face face-back">
+          Converts any type of input (URL, text, JSON, image paths) into a QR code on the fly via an API or web form.
+          <div class="tech-stack">Python · Flask · qrcode · REST API</div>
+          <div class="project-links">
+            <a href="https://github.com/yourusername/anything-to-qr" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://anythingtoqr-demo-link.com" target="_blank" rel="noopener noreferrer">Live Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Flip logic -->
+  <script>
+    document.querySelectorAll('.dice').forEach(dice => {
+      dice.addEventListener('click', () => {
+        dice.classList.toggle('flipped');
+      });
+
+      dice.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dice.classList.toggle('flipped');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

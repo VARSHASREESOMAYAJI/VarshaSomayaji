@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Backend Projects - Anything to QR</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pVv+8zrP2jOtE21bh+CmQkW07SgNKPv/eKXRJpZxFl+mOX1g2pH+s8jwHJPx0BrJSRk8lYcYN1d7Xg2cGYz0xw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      color: #333;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      user-select: none;
+    }
+
+    .nav-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .nav-icon:hover,
+    .nav-icon:focus {
+      background: linear-gradient(45deg, #4facfe, #00f2fe);
+      color: white;
+      transform: scale(1.1);
+      outline: none;
+    }
+
+    /* Title */
+    h1 {
+      color: #0099cc;
+      font-weight: 800;
+      font-size: 2.4rem;
+      margin: 0 0 2.5rem;
+    }
+
+    /* Grid container */
+    .dice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 1rem;
+    }
+
+    /* Dice card */
+    .dice {
+      width: 100%;
+      max-width: 220px;
+      aspect-ratio: 1 / 1; /* keeps square */
+      perspective: 1000px;
+      cursor: pointer;
+      margin: 0 auto;
+      outline-offset: 4px;
+    }
+
+    .dice-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      user-select: none;
+      background: linear-gradient(135deg, #f0faff, #d2e3f3);
+    }
+
+    .dice.flipped .dice-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Faces */
+    .dice-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-sizing: border-box;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Front */
+    .face-front {
+      color: #0077b6;
+      font-weight: 900;
+      font-size: 1.8rem;
+      border: 3px solid #00a8e8;
+      gap: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #f0faff, #d2e3f3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .face-front img.preview {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
+    }
+
+    .face-front .icon {
+      font-size: 2rem;
+      margin: 0.3rem 0;
+    }
+
+    .stack-icons {
+      margin-top: 0.5rem;
+      color: #00a8e8;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .stack-icons i {
+      line-height: 1;
+    }
+
+    /* Back */
+    .face-back {
+      background: #00b4d8;
+      color: white;
+      transform: rotateY(180deg);
+      font-weight: 600;
+      line-height: 1.4;
+      font-size: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 180, 216, 0.6);
+    }
+
+    .tech-stack {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-style: italic;
+      opacity: 0.9;
+    }
+
+    .project-links {
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-links a {
+      background: white;
+      color: #0077b6;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .project-links a:hover,
+    .project-links a:focus {
+      background: #0077b6;
+      color: white;
+      outline: none;
+    }
+
+    /* Keyboard focus outline */
+    .dice:focus {
+      outline: 3px solid #00a8e8;
+      outline-offset: 6px;
+    }
+
+    /* Hover effect to slightly rotate front face */
+    .dice:hover .dice-inner:not(.flipped),
+    .dice:focus-visible .dice-inner:not(.flipped) {
+      transform: rotateY(15deg) scale(1.03);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .dice-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .dice {
+        max-width: 160px;
+      }
+
+      .face-front {
+        font-size: 1.4rem;
+      }
+
+      .face-front img.preview {
+        width: 50px;
+        height: 50px;
+      }
+
+      .stack-icons {
+        font-size: 0.9rem;
+        gap: 0.4rem;
+      }
+
+      .face-back {
+        font-size: 0.9rem;
+        padding: 1rem;
+      }
+
+      .project-links a {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .dice-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav role="navigation" aria-label="Main Navigation">
+    <a href="index.html" class="nav-icon" title="Home" aria-label="Home Page">
+      <i class="fas fa-home" aria-hidden="true"></i>
+    </a>
+    <a href="projects.html" class="nav-icon" title="Back to Categories" aria-label="Back to Categories">
+      <i class="fas fa-arrow-left" aria-hidden="true"></i>
+    </a>
+  </nav>
+
+  <!-- Page Title -->
+  <h1>Backend Projects</h1>
+
+  <!-- Dice Grid -->
+  <section class="dice-grid" aria-label="Backend Projects List">
+
+    <!-- Project Card: Anything to QR -->
+    <article
+      class="dice"
+      tabindex="0"
+      role="button"
+      aria-pressed="false"
+      aria-label="Anything to QR Project Card, click to flip and see details"
+    >
+      <div class="dice-inner">
+        <div class="dice-face face-front">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=HelloWorld"
+            alt="QR Code Preview"
+            class="preview"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="icon" aria-hidden="true">🔗</div>
+          <div>Anything to QR</div>
+          <div class="stack-icons" aria-label="Technologies used">
+            <i class="fab fa-python" title="Python" aria-hidden="true"></i>
+            <i class="fas fa-server" title="Flask" aria-hidden="true"></i>
+            <i class="fas fa-qrcode" title="QR Code" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="dice-face face-back">
+          Converts any type of input (URL, text, JSON, image paths) into a QR code on the fly via an API or web form.
+          <div class="tech-stack" aria-label="Tech Stack">Python · Flask · qrcode · REST API</div>
+          <nav class="project-links" aria-label="Project external links">
+            <a href="https://github.com/yourusername/anything-to-qr" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <a href="https://anythingtoqr-demo-link.com" target="_blank" rel="noopener noreferrer">
+              Live Demo
+            </a>
+          </nav>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- Flip logic -->
+  <script>
+    const allDice = document.querySelectorAll('.dice');
+
+    allDice.forEach(dice => {
+      dice.addEventListener('click', () => {
+        // Close others
+        allDice.forEach(d => {
+          if (d !== dice) {
+            d.classList.remove('flipped');
+            d.setAttribute('aria-pressed', 'false');
+          }
+        });
+        // Toggle clicked one
+        const flipped = dice.classList.toggle('flipped');
+        dice.setAttribute('aria-pressed', flipped.toString());
+      });
+
+      dice.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          // Close others
+          allDice.forEach(d => {
+            if (d !== dice) {
+              d.classList.remove('flipped');
+              d.setAttribute('aria-pressed', 'false');
+            }
+          });
+          // Toggle clicked one
+          const flipped = dice.classList.toggle('flipped');
+          dice.setAttribute('aria-pressed', flipped.toString());
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
