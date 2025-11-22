@@ -6,56 +6,187 @@
   <title>Contact - Varsha Somayaji</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    :root { --accent:#ff497c; --muted:#5a5a5a; }
-    body {
-      font-family: Inter,Arial,sans-serif;
-      margin:0;
-      padding:2rem;
-      text-align:center;
-      background:linear-gradient(270deg,#ffe0f0,#e0f7ff,#fff7e0);
-      background-size:600% 600%;
-      animation:bgAnim 12s ease infinite;
+    /* ===== base / navbar (unchanged style you provided) ===== */
+    :root{
+      --accent:#ff758c;
+      --muted:#6b6b74;
+      --glass: rgba(255,255,255,0.9);
+      --card-radius:18px;
+      --maxw:980px;
+      --soft-shadow: 0 12px 30px rgba(20,20,30,0.06);
     }
-    @keyframes bgAnim { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    nav{display:flex;justify-content:center;gap:1rem;background:rgba(255,255,255,.85);padding:.5rem;border-radius:0 0 12px 12px;margin-bottom:2rem;box-shadow:0 6px 18px rgba(20,20,30,.06)}
-    .nav-icon{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:#fff;color:#111;text-decoration:none;font-size:1.2rem}
-    h1{color:var(--accent);margin-bottom:1rem;font-size:2rem}
-    .card{background:#ffffffee;padding:1.6rem;border-radius:14px;box-shadow:0 10px 30px rgba(20,20,30,.1);max-width:480px;margin:0 auto}
-    .btn{display:block;width:100%;padding:.9rem;margin:.5rem 0;border-radius:10px;font-size:1rem;font-weight:700;text-decoration:none}
-    .btn-linkedin{background:#0077b5;color:#fff}
-    .btn-whatsapp{background:#25d366;color:#fff}
-    .btn-form{background:var(--accent);color:#fff}
-    .btn:hover{transform:scale(1.03)}
+    body{
+      font-family: "Inter", Arial, sans-serif;
+      margin:0;
+      padding:2.25rem;
+      background: linear-gradient(270deg,#fff8fb,#f0fbff 50%, #fff7f2);
+      color:#222;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-align:center;
+    }
+    @media (prefers-reduced-motion: no-preference){
+      body{ background-size: 400% 400%; animation: bgShift 18s ease infinite; }
+      @keyframes bgShift{ 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+    }
+
+    nav{
+      display:flex; justify-content:center; gap:1rem;
+      background: rgba(255,255,255,0.82);
+      padding:0.5rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-radius: 0 0 15px 15px;
+      backdrop-filter: blur(8px);
+      margin-bottom:2rem;
+    }
+    .nav-icon{
+      position:relative;
+      display:flex; align-items:center; justify-content:center;
+      width:45px; height:45px; border-radius:12px; background:#fff; color:#111;
+      font-size:1.15rem; transition:all .22s ease; text-decoration:none;
+    }
+    .nav-icon:hover{ background: linear-gradient(45deg,#ff7eb3,#ff758c,#ffb199); color: #fff; transform:scale(1.08); box-shadow:0 6px 18px rgba(0,0,0,0.12); }
+    .tooltip{ position:absolute; bottom:-22px; background:#ff758c; color:#fff; padding:4px 8px; border-radius:6px; font-size:.72rem; opacity:0; transform:translateY(6px); transition:all .18s ease; pointer-events:none; white-space:nowrap;}
+    .nav-icon:hover .tooltip{ opacity:1; transform:translateY(0); }
+
+    /* ===== classy contact card ===== */
+    main{ max-width:var(--maxw); margin:0 auto; padding:0 1rem; }
+    h1{
+      font-family: "Georgia", "Times New Roman", serif;
+      color:var(--accent);
+      font-size:2.1rem; margin:0 0 0.75rem; letter-spacing:.2px;
+    }
+    .lead{ color:var(--muted); margin-bottom:1.35rem; font-size:0.98rem; }
+
+    .card {
+      position:relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.92));
+      border-radius: var(--card-radius);
+      box-shadow: var(--soft-shadow);
+      padding: 1.6rem;
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap: 1.25rem;
+      align-items:center;
+      overflow:hidden;
+    }
+
+    /* subtle decorative image (uses uploaded image path) */
+    .card::before{
+      content: "";
+      position:absolute;
+      right:-8%;
+      top:-6%;
+      width:420px;
+      height:420px;
+      background-image: url("/mnt/data/6198068f-d9f6-470c-b5cc-20b0a33d6396.png");
+      background-size: cover;
+      background-position: center;
+      opacity: .08;
+      filter: blur(8px) saturate(.95);
+      transform: rotate(-6deg);
+      pointer-events:none;
+    }
+
+    /* left column: copy */
+    .card-copy { text-align:left; padding-right:0.5rem; }
+    .card-copy p { margin:0 0 .75rem; color:var(--muted); font-size:0.98rem; line-height:1.5; }
+    .card-copy .hint { font-size:0.86rem; color:#8a8a90; margin-top:6px; }
+
+    /* right column: action stack */
+    .card-actions {
+      display:flex; flex-direction:column; gap:10px;
+      align-items:stretch;
+    }
+
+    .action-btn {
+      display:inline-flex; align-items:center; gap:12px;
+      padding:12px 14px; border-radius:12px; text-decoration:none;
+      font-weight:700; font-size:0.98rem; border:1px solid rgba(16,16,20,0.03);
+      transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+      box-shadow: 0 6px 18px rgba(20,20,30,0.06);
+    }
+    .action-btn:active{ transform:translateY(1px); }
+    .action-btn .ico{ width:28px; height:28px; display:inline-grid; place-items:center; border-radius:8px; background:rgba(255,255,255,0.06); font-size:1.05rem; }
+
+    /* color variants */
+    .linkedin{ background: linear-gradient(180deg,#0677a9,#0b5e8a); color:#fff; }
+    .linkedin .ico{ background: rgba(255,255,255,0.06); color:#fff; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.06); }
+    .linkedin:hover{ transform: translateY(-6px); box-shadow:0 18px 40px rgba(6,119,169,0.12); }
+
+    .whatsapp{ background: linear-gradient(180deg,#2ed06a,#18a64b); color:#052114; }
+    .whatsapp .ico{ background: rgba(255,255,255,0.06); color:#052114; }
+    .whatsapp:hover{ transform: translateY(-6px); box-shadow:0 18px 40px rgba(46,208,106,0.12); }
+
+    .tally{ background: linear-gradient(180deg,#ff6ea7,#ff4fa3); color:#fff; }
+    .tally .ico{ background: rgba(255,255,255,0.06); color:#fff; }
+    .tally:hover{ transform: translateY(-6px); box-shadow:0 18px 40px rgba(255,79,163,0.12); }
+
+    .subtle { font-size:.9rem; color:#777; margin-top:8px; }
+
+    /* responsive */
+    @media (max-width:880px){
+      .card { grid-template-columns: 1fr; padding:1.1rem; }
+      .card::before{ display:none; }
+    }
   </style>
 </head>
 <body>
-  <nav aria-label="Main Navigation">
-    <a href="index.html" class="nav-icon"><i class="fas fa-home"></i></a>
-    <a href="about.html" class="nav-icon"><i class="fas fa-user"></i></a>
-    <a href="allpro.html" class="nav-icon"><i class="fas fa-code"></i></a>
-    <a href="contact.html" class="nav-icon"><i class="fas fa-envelope"></i></a>
+  <!-- preserved navbar -->
+  <nav>
+    <a href="index.html" class="nav-icon" aria-label="Home">
+      <i class="fas fa-home"></i><span class="tooltip">Home</span>
+    </a>
+    <a href="about.html" class="nav-icon" aria-label="About">
+      <i class="fas fa-user"></i><span class="tooltip">About</span>
+    </a>
+    <a href="skills.html" class="nav-icon" aria-label="Skills">
+      <i class="fas fa-cogs"></i><span class="tooltip">Skills</span>
+    </a>
+    <a href="allpro.html" class="nav-icon" aria-label="Projects">
+      <i class="fas fa-code"></i><span class="tooltip">Projects</span>
+    </a>
+    <a href="services.html" class="nav-icon" aria-label="Services">
+      <i class="fas fa-briefcase"></i><span class="tooltip">Services</span>
+    </a>
+    <a href="education.html" class="nav-icon" aria-label="Education">
+      <i class="fas fa-graduation-cap"></i><span class="tooltip">Education</span>
+    </a>
+    <a href="contact.html" class="nav-icon" aria-label="Contact">
+      <i class="fas fa-envelope"></i><span class="tooltip">Contact</span>
+    </a>
   </nav>
 
-  <h1>Contact Me</h1>
+  <main>
+    <h1>Contact</h1>
+    <div class="lead">choose a channel and I’ll get back quickly.</div>
 
-  <div class="card">
-    <a class="btn btn-linkedin"
-       href="https://www.linkedin.com/messaging/thread/new/?recipients=varsha-sree-somayaji"
-       target="_blank" rel="noopener">
-      <i class="fab fa-linkedin"></i> Message Me on LinkedIn
-    </a>
+    <section class="card" aria-label="Contact options">
+      <div class="card-copy">
+        <p>
+          For quick chats use <strong>WhatsApp</strong>. For professional messages, prefer <strong>LinkedIn</strong>.
+          Want to stay anonymous? leave a note using the secure Tally form.
+        </p>
+        <div class="subtle">I check LinkedIn & WhatsApp daily. Tally messages are anonymous and reviewed weekly.</div>
+      </div>
 
-    <a class="btn btn-whatsapp"
-       href="https://wa.me/917995807235"
-       target="_blank" rel="noopener">
-      <i class="fab fa-whatsapp"></i> WhatsApp Me
-    </a>
+      <div class="card-actions" role="list">
+        <a role="listitem" class="action-btn linkedin" href="https://www.linkedin.com/messaging/thread/new/?recipients=varsha-sree-somayaji" target="_blank" rel="noopener noreferrer" aria-label="Message on LinkedIn">
+          <span class="ico"><i class="fab fa-linkedin"></i></span>
+          Message on LinkedIn
+        </a>
 
-    <a class="btn btn-form"
-       href="https://tally.so/r/444ldo"
-       target="_blank" rel="noopener">
-      <i class="fas fa-paper-plane"></i> Send Anonymous Message
-    </a>
-  </div>
+        <a role="listitem" class="action-btn whatsapp" href="https://wa.me/917995807235" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+          <span class="ico"><i class="fab fa-whatsapp"></i></span>
+          Chat on WhatsApp
+        </a>
+
+        <a role="listitem" class="action-btn tally" href="https://tally.so/r/444ldo" target="_blank" rel="noopener noreferrer" aria-label="Send anonymous message">
+          <span class="ico"><i class="fas fa-paper-plane"></i></span>
+          Send an anonymous message
+        </a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
